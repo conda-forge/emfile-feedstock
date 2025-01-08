@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/emfile-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/emfile-{{ version }}.tar.gz
   sha256: d7e9114aac5e2a29db9d77ab669659499c2f8c38ca13a5ff468c39ec89181a9b
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - numpy
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - numpy
-    - python >=3.7
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/brisvag/emfile
